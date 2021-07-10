@@ -1,0 +1,37 @@
+<div class= "container">
+<div class="block text-center col-12">
+    <h1 class="block-title">Feed</h1>
+</div>
+<% if user_signed_in? %>
+<h4>tweet</h4>
+<%= form_tag create_tweet_path, method: :post do %>
+<%= text_area_tag 'content' %>
+<p><%= submit_tag 'Tweet',class:"btn-primary" %></p>
+<% end %>
+<% end %>
+<hr>
+<div class="home-wrapper">
+	<div id="tweets">
+	<h3>Tweets</h3>
+	<% if @tweets.count > 0 %>
+		<%= render partial: 'main/tweets', locals: { items: @tweets},:formats=>[:js] %>
+	<% else %>
+		<p>
+			<em>No tweets</em>
+		</p>
+	<% end %>
+	</div>
+	<% if user_signed_in? %>
+	<div id="friends">
+	<h3>Tweets de amigos</h3>
+	<% if @friends_tweets.count > 0 %>
+		<%= render partial: 'main/tweets', locals: { items: @friends_tweets},:formats=>[:js] %>
+	<% else %>
+		<p>
+			<em>Sigue a mas amigos para ver que sucede</em>
+		</p>
+	<% end %>
+	</div>
+	<% end %>
+</div>
+</div>
